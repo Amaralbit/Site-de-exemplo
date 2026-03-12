@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOTEX — Óleos & Lubrificantes</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #e8a020;
+  --gold-light: #f5c054;
+  --orange: #d45f10;
+  --red: #c0392b;
+  --green: #27ae60;
+  --trans: 0.25s ease;
+}
+[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --panel: #1a1a1a;
+  --border: #2a2a2a;
+  --border2: #333;
+  --text: #f0ede8;
+  --text2: #aaa;
+  --text3: #666;
+  --shadow: rgba(0,0,0,0.5);
+  --overlay: rgba(0,0,0,0.85);
+}
+[data-theme="light"] {
+  --bg: #f5f3ef;
+  --surface: #ffffff;
+  --panel: #f0ede8;
+  --border: #e0dbd0;
+  --border2: #ccc;
+  --text: #1a1a1a;
+  --text2: #555;
+  --text3: #999;
+  --shadow: rgba(0,0,0,0.12);
+  --overlay: rgba(255,255,255,0.92);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden;transition:background var(--trans),color var(--trans);}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px;background:var(--overlay);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);transition:background var(--trans);}
+.nav-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:26px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;cursor:pointer;}
+.nav-logo span{color:var(--text);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;transition:color var(--trans);}
+.nav-links a:hover{color:var(--gold);}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.theme-btn{background:var(--panel);border:1px solid var(--border);color:var(--text2);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all var(--trans);}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold);}
+.nav-cart{display:flex;align-items:center;gap:6px;background:var(--gold);color:#000;border:none;cursor:pointer;padding:8px 18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;transition:background var(--trans);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.nav-cart:hover{background:var(--gold-light);}
+.cart-badge{background:var(--red);color:#fff;border-radius:50%;width:18px;height:18px;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;}
+.hamburger{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;}
+
+/* ─── HERO ─── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:100px 40px 60px;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(232,160,32,0.12) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 20% 80%,rgba(212,95,16,0.08) 0%,transparent 50%),var(--surface);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(232,160,32,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(232,160,32,0.04) 1px,transparent 1px);background-size:60px 60px;}
+.hero-content{position:relative;max-width:620px;}
+.hero-tag{display:inline-block;background:var(--gold);color:#000;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:4px 14px;margin-bottom:24px;animation:fadeUp 0.6s ease both;}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(58px,7.5vw,104px);line-height:0.9;text-transform:uppercase;margin-bottom:24px;letter-spacing:-1px;animation:fadeUp 0.6s 0.1s ease both;}
+.hero h1 em{font-style:normal;color:var(--gold);display:block;}
+.hero p{font-size:15px;line-height:1.8;color:var(--text2);max-width:460px;margin-bottom:40px;animation:fadeUp 0.6s 0.2s ease both;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp 0.6s 0.3s ease both;}
+.btn-primary{background:var(--gold);color:#000;border:none;cursor:pointer;padding:13px 34px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:14px;letter-spacing:2px;text-transform:uppercase;transition:all var(--trans);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border2);cursor:pointer;padding:13px 34px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:2px;text-transform:uppercase;transition:all var(--trans);}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+.hero-stats{display:flex;gap:40px;margin-top:52px;animation:fadeUp 0.6s 0.4s ease both;}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:38px;color:var(--gold);line-height:1;display:block;}
+.stat-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-top:2px;display:block;}
+
+/* ─── TICKER ─── */
+.ticker{background:var(--gold);padding:9px 0;overflow:hidden;white-space:nowrap;}
+.ticker-inner{display:inline-block;animation:ticker 22s linear infinite;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#000;}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ─── SECTIONS ─── */
+.section{padding:80px 40px;}
+.section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:16px;}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,50px);text-transform:uppercase;letter-spacing:-0.5px;line-height:1;}
+.section-title span{color:var(--gold);}
+.section-sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+.link-all{color:var(--gold);text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid var(--gold);transition:opacity var(--trans);white-space:nowrap;}
+.link-all:hover{opacity:0.7;}
+
+/* ─── FILTER BAR ─── */
+.filter-bar{background:var(--surface);border:1px solid var(--border);padding:20px 24px;margin-bottom:28px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;}
+.filter-group{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.filter-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-right:4px;}
+.filter-chip{background:var(--panel);border:1px solid var(--border);color:var(--text2);padding:6px 14px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all var(--trans);}
+.filter-chip:hover,.filter-chip.active{background:var(--gold);border-color:var(--gold);color:#000;}
+.sort-select{background:var(--panel);border:1px solid var(--border);color:var(--text);padding:7px 14px;font-family:'Barlow',sans-serif;font-size:13px;cursor:pointer;outline:none;transition:border-color var(--trans);}
+.sort-select:hover{border-color:var(--gold);}
+.search-box{display:flex;align-items:center;gap:0;flex:1;max-width:280px;}
+.search-input{background:var(--panel);border:1px solid var(--border);border-right:none;color:var(--text);padding:7px 14px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;width:100%;transition:border-color var(--trans);}
+.search-input::placeholder{color:var(--text3);}
+.search-input:focus{border-color:var(--gold);}
+.search-btn{background:var(--gold);border:none;color:#000;padding:7px 14px;cursor:pointer;font-size:15px;}
+
+/* ─── PRODUCT GRID ─── */
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.prod-card{background:var(--surface);position:relative;overflow:hidden;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;border:1px solid var(--border);}
+.prod-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px var(--shadow);}
+.prod-badge{position:absolute;top:14px;left:14px;z-index:3;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;}
+.badge-novo{background:var(--gold);color:#000;}
+.badge-hot{background:var(--orange);color:#fff;}
+.badge-off{background:var(--red);color:#fff;}
+.prod-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:72px;background:linear-gradient(135deg,var(--panel),var(--surface));position:relative;overflow:hidden;transition:transform 0.4s ease;}
+.prod-card:hover .prod-img{transform:scale(1.04);}
+.prod-wishlist{position:absolute;top:14px;right:14px;z-index:3;background:var(--panel);border:1px solid var(--border);color:var(--text3);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all var(--trans);}
+.prod-wishlist:hover,.prod-wishlist.active{background:var(--red);border-color:var(--red);color:#fff;}
+.prod-body{padding:18px;}
+.prod-brand{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.prod-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:0.5px;margin-bottom:4px;line-height:1.2;color:var(--text);}
+.prod-desc{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:10px;}
+.stars{display:flex;align-items:center;gap:4px;margin-bottom:12px;}
+.star-icons{color:var(--gold);font-size:13px;letter-spacing:1px;}
+.star-count{font-size:11px;color:var(--text3);}
+.prod-footer{display:flex;justify-content:space-between;align-items:center;}
+.prod-price{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:26px;color:var(--gold);}
+.prod-price-old{font-size:12px;color:var(--text3);text-decoration:line-through;display:block;line-height:1;margin-bottom:1px;}
+.btn-add{background:var(--gold);color:#000;border:none;cursor:pointer;width:40px;height:40px;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all var(--trans);clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));flex-shrink:0;}
+.btn-add:hover{background:var(--gold-light);transform:scale(1.12);}
+.no-results{text-align:center;padding:60px 20px;color:var(--text3);font-size:15px;}
+
+/* ─── PRODUCT MODAL ─── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-box{background:var(--surface);max-width:860px;width:100%;max-height:90vh;overflow-y:auto;position:relative;border:1px solid var(--border);transform:translateY(20px);transition:transform 0.25s ease;}
+.modal-overlay.open .modal-box{transform:translateY(0);}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--panel);border:1px solid var(--border);color:var(--text);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;z-index:5;transition:all var(--trans);}
+.modal-close:hover{background:var(--red);border-color:var(--red);color:#fff;}
+.modal-inner{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.modal-img{background:linear-gradient(135deg,var(--panel),var(--surface));display:flex;align-items:center;justify-content:center;font-size:120px;min-height:340px;padding:40px;}
+.modal-info{padding:40px 36px;}
+.modal-brand{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.modal-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:32px;line-height:1;margin-bottom:12px;text-transform:uppercase;color:var(--text);}
+.modal-stars{display:flex;align-items:center;gap:8px;margin-bottom:16px;}
+.modal-desc{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:20px;}
+.modal-specs{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.spec-item label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);display:block;margin-bottom:3px;}
+.spec-item span{font-size:13px;color:var(--text);font-weight:500;}
+.modal-price-row{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.modal-price{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:42px;color:var(--gold);}
+.modal-price-old{font-size:16px;color:var(--text3);text-decoration:line-through;}
+.modal-qty{display:flex;align-items:center;gap:0;margin-bottom:20px;}
+.qty-btn{background:var(--panel);border:1px solid var(--border);color:var(--text);width:36px;height:36px;font-size:18px;cursor:pointer;transition:all var(--trans);display:flex;align-items:center;justify-content:center;}
+.qty-btn:hover{background:var(--gold);border-color:var(--gold);color:#000;}
+.qty-num{background:var(--surface);border:1px solid var(--border);border-left:none;border-right:none;color:var(--text);width:48px;height:36px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;}
+.modal-actions{display:flex;gap:10px;}
+.btn-modal-cart{flex:1;background:var(--gold);color:#000;border:none;cursor:pointer;padding:13px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:14px;letter-spacing:2px;text-transform:uppercase;transition:all var(--trans);}
+.btn-modal-cart:hover{background:var(--gold-light);}
+.btn-modal-wish{background:var(--panel);border:1px solid var(--border);color:var(--text2);padding:13px 16px;cursor:pointer;font-size:18px;transition:all var(--trans);}
+.btn-modal-wish:hover{background:var(--red);border-color:var(--red);color:#fff;}
+
+/* ─── REVIEWS ─── */
+.reviews-section{margin-top:20px;border-top:1px solid var(--border);padding:0;}
+.reviews-header{padding:20px 36px 0;display:flex;justify-content:space-between;align-items:center;}
+.reviews-header h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;color:var(--text);}
+.reviews-list{padding:0 36px 36px;max-height:260px;overflow-y:auto;}
+.review-item{border-bottom:1px solid var(--border);padding:16px 0;}
+.review-item:last-child{border-bottom:none;}
+.review-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.review-author{font-weight:500;font-size:14px;color:var(--text);}
+.review-date{font-size:11px;color:var(--text3);}
+.review-text{font-size:13px;color:var(--text2);line-height:1.7;}
+.add-review{padding:0 36px 24px;}
+.add-review textarea{width:100%;background:var(--panel);border:1px solid var(--border);color:var(--text);padding:12px;font-family:'Barlow',sans-serif;font-size:13px;resize:vertical;min-height:80px;outline:none;transition:border-color var(--trans);}
+.add-review textarea:focus{border-color:var(--gold);}
+.add-review textarea::placeholder{color:var(--text3);}
+.review-form-row{display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap;}
+.star-picker{display:flex;gap:4px;}
+.star-pick{font-size:20px;cursor:pointer;color:var(--border2);transition:color var(--trans);}
+.star-pick.active,.star-pick:hover~.star-pick{color:var(--border2);}
+.star-pick.active~.star-pick{color:var(--border2);}
+.star-picker:hover .star-pick{color:var(--gold);}
+.star-picker .star-pick:hover~.star-pick{color:var(--border2);}
+.btn-review{background:var(--gold);color:#000;border:none;cursor:pointer;padding:8px 20px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:all var(--trans);}
+.btn-review:hover{background:var(--gold-light);}
+
+/* ─── CART PANEL ─── */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:400;opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
+.cart-overlay.open{opacity:1;pointer-events:all;}
+.cart-panel{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:100vw;background:var(--surface);z-index:401;transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-left:1px solid var(--border);}
+.cart-panel.open{transform:translateX(0);}
+.cart-head{padding:24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.cart-head h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:24px;text-transform:uppercase;letter-spacing:1px;color:var(--text);}
+.cart-close{background:none;border:none;color:var(--text2);font-size:22px;cursor:pointer;transition:color var(--trans);}
+.cart-close:hover{color:var(--red);}
+.cart-items{flex:1;overflow-y:auto;padding:16px 24px;}
+.cart-empty{text-align:center;padding:60px 0;color:var(--text3);font-size:15px;}
+.cart-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+.cart-item-img{width:60px;height:60px;background:var(--panel);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;}
+.cart-item-info{flex:1;}
+.cart-item-brand{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);}
+.cart-item-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;color:var(--text);margin:2px 0;}
+.cart-item-price{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--gold);}
+.cart-item-controls{display:flex;align-items:center;gap:8px;margin-top:6px;}
+.cart-qty-btn{background:var(--panel);border:1px solid var(--border);color:var(--text);width:26px;height:26px;font-size:14px;cursor:pointer;transition:all var(--trans);display:flex;align-items:center;justify-content:center;}
+.cart-qty-btn:hover{background:var(--gold);color:#000;border-color:var(--gold);}
+.cart-qty-num{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;color:var(--text);width:24px;text-align:center;}
+.cart-remove{background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;margin-left:auto;transition:color var(--trans);}
+.cart-remove:hover{color:var(--red);}
+.cart-foot{padding:20px 24px;border-top:1px solid var(--border);}
+.cart-coupon{display:flex;gap:0;margin-bottom:16px;}
+.coupon-input{flex:1;background:var(--panel);border:1px solid var(--border);color:var(--text);padding:9px 14px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;transition:border-color var(--trans);}
+.coupon-input:focus{border-color:var(--gold);}
+.coupon-input::placeholder{color:var(--text3);}
+.coupon-btn{background:var(--gold);color:#000;border:none;padding:9px 18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:1px;cursor:pointer;transition:all var(--trans);}
+.coupon-btn:hover{background:var(--gold-light);}
+.cart-totals{margin-bottom:16px;}
+.cart-row{display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px;color:var(--text2);}
+.cart-row.total{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;color:var(--text);border-top:1px solid var(--border);padding-top:10px;margin-top:8px;}
+.cart-row.discount{color:var(--green);}
+.btn-checkout{width:100%;background:var(--gold);color:#000;border:none;cursor:pointer;padding:15px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:2px;text-transform:uppercase;transition:all var(--trans);clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));}
+.btn-checkout:hover{background:var(--gold-light);}
+
+/* ─── CHECKOUT MODAL ─── */
+.checkout-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
+.checkout-overlay.open{opacity:1;pointer-events:all;}
+.checkout-box{background:var(--surface);max-width:600px;width:100%;max-height:90vh;overflow-y:auto;border:1px solid var(--border);transform:translateY(20px);transition:transform 0.25s ease;}
+.checkout-overlay.open .checkout-box{transform:translateY(0);}
+.checkout-head{padding:28px 32px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.checkout-head h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;text-transform:uppercase;letter-spacing:1px;color:var(--text);}
+.steps{display:flex;gap:0;margin-bottom:0;}
+.step{flex:1;text-align:center;padding:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);border-bottom:2px solid var(--border);transition:all var(--trans);}
+.step.active{color:var(--gold);border-bottom-color:var(--gold);}
+.step.done{color:var(--green);border-bottom-color:var(--green);}
+.checkout-body{padding:28px 32px;}
+.form-group{margin-bottom:18px;}
+.form-group label{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;}
+.form-input{width:100%;background:var(--panel);border:1px solid var(--border);color:var(--text);padding:10px 14px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;transition:border-color var(--trans);}
+.form-input:focus{border-color:var(--gold);}
+.form-input::placeholder{color:var(--text3);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.payment-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px;}
+.pay-opt{background:var(--panel);border:2px solid var(--border);padding:14px;text-align:center;cursor:pointer;transition:all var(--trans);}
+.pay-opt:hover{border-color:var(--gold);}
+.pay-opt.selected{border-color:var(--gold);background:rgba(232,160,32,0.08);}
+.pay-opt .pay-icon{font-size:24px;display:block;margin-bottom:6px;}
+.pay-opt .pay-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--text);}
+.checkout-nav{display:flex;justify-content:space-between;margin-top:24px;gap:12px;}
+.btn-back{background:transparent;border:1px solid var(--border);color:var(--text2);padding:12px 28px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all var(--trans);}
+.btn-back:hover{border-color:var(--text);color:var(--text);}
+.btn-next{background:var(--gold);color:#000;border:none;padding:12px 36px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all var(--trans);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.btn-next:hover{background:var(--gold-light);}
+.success-state{text-align:center;padding:40px 20px;}
+.success-icon{font-size:64px;display:block;margin-bottom:16px;animation:bounce 0.6s ease;}
+.success-state h3{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:36px;text-transform:uppercase;color:var(--text);margin-bottom:10px;}
+.success-state p{font-size:14px;color:var(--text2);line-height:1.8;}
+.order-num{background:var(--panel);border:1px solid var(--border);padding:12px 24px;margin:20px auto;display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;color:var(--gold);letter-spacing:2px;}
+
+/* ─── BRANDS ─── */
+.brands-strip{padding:48px 40px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.brands-label{text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:28px;}
+.brands-row{display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:20px;}
+.brand-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;letter-spacing:3px;text-transform:uppercase;color:var(--border2);transition:color var(--trans);cursor:default;}
+.brand-name:hover{color:var(--gold);}
+
+/* ─── WHY ─── */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.why-card{background:var(--surface);border:1px solid var(--border);padding:36px 28px;border-top:3px solid transparent;transition:border-color var(--trans);}
+.why-card:hover{border-top-color:var(--gold);}
+.why-icon{font-size:36px;margin-bottom:16px;display:block;}
+.why-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:18px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;color:var(--text);}
+.why-text{font-size:13px;color:var(--text2);line-height:1.8;}
+
+/* ─── PROMO ─── */
+.promo-wrap{padding:0 40px 80px;}
+.promo-banner{background:var(--gold);padding:52px 56px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));}
+.promo-text h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:48px;text-transform:uppercase;color:#000;line-height:1;letter-spacing:-1px;}
+.promo-text p{color:rgba(0,0,0,0.55);font-size:14px;margin-top:6px;}
+.promo-code-box{background:#000;padding:20px 36px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));text-align:center;}
+.promo-code-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-bottom:6px;}
+.promo-code-val{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:32px;color:var(--gold);letter-spacing:4px;}
+.promo-code-hint{font-size:11px;color:#555;margin-top:4px;}
+
+/* ─── FOOTER ─── */
+footer{background:var(--surface);padding:56px 40px 28px;border-top:1px solid var(--border);}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px;}
+.footer-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+.footer-logo span{color:var(--text);}
+.footer-desc{font-size:13px;color:var(--text2);line-height:1.8;max-width:260px;}
+.footer-col h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--text);margin-bottom:18px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:9px;}
+.footer-col ul li a{color:var(--text2);text-decoration:none;font-size:13px;transition:color var(--trans);}
+.footer-col ul li a:hover{color:var(--gold);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--text3);}
+.footer-pay{display:flex;gap:10px;}
+.pay-chip{background:var(--panel);border:1px solid var(--border);padding:4px 10px;font-size:11px;color:var(--text3);font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:1px;}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;bottom:28px;right:28px;z-index:999;background:var(--gold);color:#000;padding:12px 22px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transform:translateY(80px);opacity:0;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bounce{0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* ─── MOBILE ─── */
+@media(max-width:960px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .hamburger{display:block;}
+  .hero{padding:90px 20px 50px;}
+  .section{padding:56px 20px;}
+  .cat-grid-wrap,.prod-grid{grid-template-columns:1fr 1fr;}
+  .why-grid{grid-template-columns:1fr 1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .promo-wrap{padding:0 20px 56px;}
+  .modal-inner{grid-template-columns:1fr;}
+  .modal-img{min-height:200px;font-size:80px;}
+  .form-row{grid-template-columns:1fr;}
+  .cart-panel{width:100vw;}
+  .hero-stats{flex-wrap:wrap;gap:24px;}
+  .filter-bar{flex-direction:column;align-items:stretch;}
+  .search-box{max-width:100%;}
+}
+@media(max-width:580px){
+  .prod-grid{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:1fr;}
+  .payment-options{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">MOT<span>EX</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#categorias">Categorias</a></li>
+    <li><a href="#produtos">Produtos</a></li>
+    <li><a href="#marcas">Marcas</a></li>
+    <li><a href="#porque">Por que nós?</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn" title="Alternar tema">🌙</button>
+    <button class="nav-cart" onclick="openCart()">
+      🛒 Carrinho <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">⚡ Performance Máxima</div>
+    <h1>O Melhor<em>Óleo</em>do Brasil</h1>
+    <p>Óleos sintéticos, semissintéticos e minerais para todos os tipos de motor. Proteção superior, menor desgaste, maior durabilidade.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('produtos').scrollIntoView({behavior:'smooth'})">Ver Produtos</button>
+      <button class="btn-secondary" onclick="openModal(products[0])">Ver Destaque</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Produtos</span></div>
+      <div class="stat"><span class="stat-num">12k</span><span class="stat-label">Clientes</span></div>
+      <div class="stat"><span class="stat-num">98%</span><span class="stat-label">Satisfação</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    ⚡ FRETE GRÁTIS acima de R$150 &nbsp;•&nbsp; TROCA FÁCIL em 30 dias &nbsp;•&nbsp; PARCELAMENTO em 12x sem juros &nbsp;•&nbsp; ENTREGA expressa em 24h &nbsp;•&nbsp; GARANTIA de origem &nbsp;•&nbsp;
+    ⚡ FRETE GRÁTIS acima de R$150 &nbsp;•&nbsp; TROCA FÁCIL em 30 dias &nbsp;•&nbsp; PARCELAMENTO em 12x sem juros &nbsp;•&nbsp; ENTREGA expressa em 24h &nbsp;•&nbsp; GARANTIA de origem &nbsp;•&nbsp;
+  </div>
+</div>
+
+<!-- PRODUTOS -->
+<section class="section" id="produtos">
+  <div class="section-header">
+    <div>
+      <div class="section-sub">Catálogo</div>
+      <div class="section-title">Nossos <span>Produtos</span></div>
+    </div>
+    <a href="#" class="link-all">Ver todos →</a>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar fade-in">
+    <div class="search-box">
+      <input class="search-input" type="text" id="searchInput" placeholder="Buscar produto..." oninput="filterProducts()">
+      <button class="search-btn">🔍</button>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Categoria:</span>
+      <button class="filter-chip active" onclick="setFilter('all',this)">Todos</button>
+      <button class="filter-chip" onclick="setFilter('motor',this)">Motor</button>
+      <button class="filter-chip" onclick="setFilter('cambio',this)">Câmbio</button>
+      <button class="filter-chip" onclick="setFilter('fluido',this)">Fluidos</button>
+      <button class="filter-chip" onclick="setFilter('aditivo',this)">Aditivos</button>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Ordenar:</span>
+      <select class="sort-select" id="sortSelect" onchange="filterProducts()">
+        <option value="default">Destaque</option>
+        <option value="price-asc">Menor preço</option>
+        <option value="price-desc">Maior preço</option>
+        <option value="rating">Avaliação</option>
+        <option value="name">Nome A–Z</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="prod-grid" id="prodGrid"></div>
+  <div class="no-results" id="noResults" style="display:none">😕 Nenhum produto encontrado para sua busca.</div>
+</section>
+
+<!-- BRANDS -->
+<section class="brands-strip" id="marcas">
+  <div class="brands-label">Trabalhamos com as melhores marcas</div>
+  <div class="brands-row">
+    <div class="brand-name">Mobil</div>
+    <div class="brand-name">Castrol</div>
+    <div class="brand-name">Shell</div>
+    <div class="brand-name">Valvoline</div>
+    <div class="brand-name">Motul</div>
+    <div class="brand-name">Wurth</div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="section" id="porque">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Por que <span>escolher</span><br>a MOTEX?</div>
+    </div>
+  </div>
+  <div class="why-grid">
+    <div class="why-card fade-in"><span class="why-icon">🚚</span><div class="why-title">Entrega Rápida</div><div class="why-text">Envio em até 24 horas. Frete grátis em compras acima de R$150.</div></div>
+    <div class="why-card fade-in"><span class="why-icon">✅</span><div class="why-title">100% Original</div><div class="why-text">Produtos originais com nota fiscal e procedência garantida.</div></div>
+    <div class="why-card fade-in"><span class="why-icon">💳</span><div class="why-title">Parcele em 12x</div><div class="why-text">Até 12 vezes sem juros no cartão. Pix, boleto e débito.</div></div>
+    <div class="why-card fade-in"><span class="why-icon">🔄</span><div class="why-title">Troca Garantida</div><div class="why-text">30 dias para troca ou devolução. Satisfação garantida.</div></div>
+  </div>
+</section>
+
+<!-- PROMO -->
+<div class="promo-wrap">
+  <div class="promo-banner fade-in">
+    <div class="promo-text">
+      <h2>15% OFF<br>na primeira compra</h2>
+      <p>Use o cupom abaixo e economize agora mesmo!</p>
+    </div>
+    <div class="promo-code-box">
+      <div class="promo-code-label">Cupom exclusivo</div>
+      <div class="promo-code-val">MOTEX15</div>
+      <div class="promo-code-hint">Válido para novos clientes</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">MOT<span>EX</span></div>
+      <div class="footer-desc">Especialistas em óleos e lubrificantes automotivos desde 2010. Qualidade e confiança para o seu veículo.</div>
+    </div>
+    <div class="footer-col"><h4>Produtos</h4><ul><li><a href="#">Óleo de Motor</a></li><li><a href="#">Câmbio</a></li><li><a href="#">Fluido de Freio</a></li><li><a href="#">Arrefecimento</a></li><li><a href="#">Aditivos</a></li></ul></div>
+    <div class="footer-col"><h4>Empresa</h4><ul><li><a href="#">Sobre nós</a></li><li><a href="#">Blog Técnico</a></li><li><a href="#">Trabalhe conosco</a></li><li><a href="#">Revendedor</a></li></ul></div>
+    <div class="footer-col"><h4>Suporte</h4><ul><li><a href="#">Central de ajuda</a></li><li><a href="#">Rastrear pedido</a></li><li><a href="#">Trocas e devoluções</a></li><li><a href="#">WhatsApp</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 MOTEX Lubrificantes. CNPJ 00.000.000/0001-00</div>
+    <div class="footer-pay">
+      <span class="pay-chip">PIX</span>
+      <span class="pay-chip">VISA</span>
+      <span class="pay-chip">MASTER</span>
+      <span class="pay-chip">BOLETO</span>
+    </div>
+  </div>
+</footer>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="productModal" onclick="closeModalOnBg(event)">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-inner">
+      <div class="modal-img" id="modalImg">🛢️</div>
+      <div class="modal-info">
+        <div class="modal-brand" id="modalBrand"></div>
+        <div class="modal-name" id="modalName"></div>
+        <div class="modal-stars" id="modalStars"></div>
+        <div class="modal-desc" id="modalDesc"></div>
+        <div class="modal-specs" id="modalSpecs"></div>
+        <div class="modal-price-row">
+          <div class="modal-price" id="modalPrice"></div>
+          <div class="modal-price-old" id="modalPriceOld"></div>
+        </div>
+        <div class="modal-qty">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <input class="qty-num" type="text" id="modalQty" value="1" readonly>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-modal-cart" onclick="addFromModal()">🛒 Adicionar ao Carrinho</button>
+          <button class="btn-modal-wish" id="modalWishBtn" onclick="toggleWish()">♡</button>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-section">
+      <div class="reviews-header">
+        <h3>Avaliações</h3>
+        <div id="avgRating"></div>
+      </div>
+      <div class="reviews-list" id="reviewsList"></div>
+      <div class="add-review">
+        <textarea id="reviewText" placeholder="Escreva sua avaliação..."></textarea>
+        <div class="review-form-row">
+          <div class="star-picker" id="starPicker">
+            <span class="star-pick active" data-v="1" onclick="setReviewStars(1)">★</span>
+            <span class="star-pick active" data-v="2" onclick="setReviewStars(2)">★</span>
+            <span class="star-pick active" data-v="3" onclick="setReviewStars(3)">★</span>
+            <span class="star-pick active" data-v="4" onclick="setReviewStars(4)">★</span>
+            <span class="star-pick active" data-v="5" onclick="setReviewStars(5)">★</span>
+          </div>
+          <button class="btn-review" onclick="submitReview()">Enviar Avaliação</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CART PANEL -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head">
+    <h2>🛒 Carrinho</h2>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-coupon">
+      <input class="coupon-input" type="text" id="couponInput" placeholder="Código de cupom...">
+      <button class="coupon-btn" onclick="applyCoupon()">Aplicar</button>
+    </div>
+    <div class="cart-totals" id="cartTotals"></div>
+    <button class="btn-checkout" onclick="openCheckout()">Finalizar Compra →</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="checkout-overlay" id="checkoutModal">
+  <div class="checkout-box">
+    <div class="checkout-head">
+      <h2 id="checkoutTitle">Checkout</h2>
+      <button class="cart-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="steps" id="checkoutSteps">
+      <div class="step active" id="step1">1. Dados</div>
+      <div class="step" id="step2">2. Entrega</div>
+      <div class="step" id="step3">3. Pagamento</div>
+    </div>
+    <div class="checkout-body" id="checkoutBody"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── DATA ───
+const products = [
+  {id:1,brand:'Mobil 1',name:'Advanced Full Synthetic 5W-30',desc:'Óleo 100% sintético com proteção extrema. Ideal para motores turboalimentados e de alta performance.',category:'motor',emoji:'🛢️',price:159.90,oldPrice:189.90,badge:'hot',rating:4.8,reviews:[{author:'Carlos M.',date:'Jan 2025',rating:5,text:'Melhor óleo que já usei! Motor ficou muito mais suave.'},{author:'Ana P.',date:'Fev 2025',rating:5,text:'Produto original, entrega rápida. Recomendo!'}],specs:{Viscosidade:'5W-30',Tipo:'100% Sintético',Volume:'4 Litros',Norma:'API SN/CF'}},
+  {id:2,brand:'Castrol',name:'EDGE 5W-40 Titanium FST',desc:'Tecnologia Titanium FST para máxima resistência à pressão do motor em condições extremas.',category:'motor',emoji:'🛢️',price:199.90,badge:'novo',rating:4.7,reviews:[{author:'Rafael S.',date:'Mar 2025',rating:5,text:'Excelente produto, consumo do carro melhorou.'},{author:'Marcos L.',date:'Jan 2025',rating:4,text:'Boa qualidade, preço justo.'}],specs:{Viscosidade:'5W-40',Tipo:'100% Sintético',Volume:'4 Litros',Norma:'ACEA A3/B4'}},
+  {id:3,brand:'Shell',name:'Helix Ultra 5W-30 Racing',desc:'Formulação de corrida adaptada para uso diário. Proteção desde a partida a frio, inclusive no inverno.',category:'motor',emoji:'🛢️',price:164.90,oldPrice:219.90,badge:'off',rating:4.6,reviews:[{author:'Priya K.',date:'Fev 2025',rating:4,text:'Muito bom, mas o preço estava um pouco alto antes do desconto.'}],specs:{Viscosidade:'5W-30',Tipo:'100% Sintético',Volume:'4 Litros',Norma:'ACEA A1/B1'}},
+  {id:4,brand:'Valvoline',name:'SynPower 0W-20 Full Synthetic',desc:'Viscosidade ultra-baixa para motores modernos. Máxima eficiência de combustível e economia.',category:'motor',emoji:'🛢️',price:179.90,badge:null,rating:4.5,reviews:[],specs:{Viscosidade:'0W-20',Tipo:'100% Sintético',Volume:'4 Litros',Norma:'API SP'}},
+  {id:5,brand:'Mobil',name:'ATF 320 Óleo de Câmbio',desc:'Para câmbios automáticos. Excelente fluidez em baixas temperaturas e estabilidade em altas.',category:'cambio',emoji:'⚙️',price:89.90,badge:'novo',rating:4.4,reviews:[{author:'João B.',date:'Mar 2025',rating:4,text:'Câmbio funcionando perfeitamente depois da troca.'}],specs:{Tipo:'ATF',Volume:'1 Litro',Norma:'DEXRON III',Aplicação:'Câmbio Automático'}},
+  {id:6,brand:'Prestone',name:'Fluido de Arrefecimento Concentrado',desc:'Proteção máxima contra corrosão, ferrugem e superaquecimento. Compatível com todos os metais.',category:'fluido',emoji:'🧊',price:49.90,badge:null,rating:4.3,reviews:[],specs:{Tipo:'Concentrado',Volume:'1 Litro',Cor:'Verde',Norma:'ASTM D3306'}},
+  {id:7,brand:'Bosch',name:'Fluido de Freio DOT 5.1',desc:'Ponto de ebulição elevado para frenagens intensas. Totalmente compatível com sistemas ABS e ESP.',category:'fluido',emoji:'🔧',price:29.90,oldPrice:35.90,badge:'off',rating:4.6,reviews:[{author:'Lena W.',date:'Jan 2025',rating:5,text:'Produto excelente, recomendo para qualquer veículo.'}],specs:{Tipo:'DOT 5.1',Volume:'500ml',Ponto:'Ebulição 265°C',Norma:'ISO 4925'}},
+  {id:8,brand:'Wurth',name:'Aditivo Combustível Premium',desc:'Limpa injetores e bicos de combustível. Melhora performance, reduce consumo e emissões de CO2.',category:'aditivo',emoji:'✨',price:54.90,badge:null,rating:4.2,reviews:[],specs:{Tipo:'Aditivo',Volume:'300ml',Aplicação:'Gasolina/Etanol',Uso:'A cada troca de óleo'}},
+  {id:9,brand:'Motul',name:'8100 X-Clean 5W-30',desc:'Óleo premium de longa duração com tecnologia EsterCore. Aprovado por fabricantes europeus.',category:'motor',emoji:'🛢️',price:224.90,badge:'novo',rating:4.9,reviews:[{author:'Dieter H.',date:'Mar 2025',rating:5,text:'Melhor óleo do mercado. Motor suave e consumo baixo.'}],specs:{Viscosidade:'5W-30',Tipo:'100% Sintético',Volume:'5 Litros',Norma:'ACEA C3'}},
+  {id:10,brand:'Castrol',name:'Transmax CVT',desc:'Fluido específico para câmbios CVT (variador contínuo). Suavidade e durabilidade incomparáveis.',category:'cambio',emoji:'⚙️',price:119.90,badge:null,rating:4.5,reviews:[],specs:{Tipo:'CVT Fluid',Volume:'1 Litro',Norma:'NS-2',Aplicação:'Câmbio CVT'}},
+  {id:11,brand:'Repsol',name:'Moto 4T 10W-40',desc:'Formulado especialmente para motocicletas 4 tempos. Protege motor, câmbio e embreagem.',category:'motor',emoji:'🛢️',price:74.90,badge:'hot',rating:4.7,reviews:[{author:'Moto Fan',date:'Fev 2025',rating:5,text:'Perfeito para a minha Honda CB 500!'}],specs:{Viscosidade:'10W-40',Tipo:'Semissintético',Volume:'1 Litro',Norma:'JASO MA2'}},
+  {id:12,brand:'Bardahl',name:'Aditivo Motor Plus',desc:'Reduz atrito e desgaste do motor. Estende a vida útil do óleo e do motor em até 30%.',category:'aditivo',emoji:'✨',price:44.90,oldPrice:59.90,badge:'off',rating:4.1,reviews:[],specs:{Tipo:'Aditivo Motor',Volume:'250ml',Uso:'A cada 5.000 km',Compatível:'Todos os óleos'}},
+];
+
+let cart = [];
+let currentProduct = null;
+let currentQty = 1;
+let currentFilter = 'all';
+let reviewStars = 5;
+let couponApplied = false;
+let checkoutStep = 1;
+let selectedPayment = null;
+let wishlist = new Set();
+
+// ─── THEME ───
+let isDark = true;
+document.getElementById('themeBtn').onclick = function(){
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  this.textContent = isDark ? '🌙' : '☀️';
+};
+
+// ─── MENU MOBILE ───
+function toggleMenu(){
+  const nl = document.getElementById('navLinks');
+  nl.style.display = nl.style.display === 'flex' ? 'none' : 'flex';
+  nl.style.flexDirection = 'column';
+  nl.style.position = 'absolute';
+  nl.style.top = '64px';
+  nl.style.left = '0';
+  nl.style.right = '0';
+  nl.style.background = 'var(--overlay)';
+  nl.style.padding = '20px';
+  nl.style.gap = '20px';
+  nl.style.backdropFilter = 'blur(14px)';
+}
+
+// ─── RENDER PRODUCTS ───
+function renderStars(r){ return '★'.repeat(Math.round(r))+'☆'.repeat(5-Math.round(r)); }
+function fmtPrice(p){ return 'R$ '+p.toFixed(2).replace('.',','); }
+function badgeHTML(b){
+  if(!b) return '';
+  const map = {hot:'🔥 Mais Vendido',novo:'Novo',off:'Desconto'};
+  const cls = {hot:'badge-hot',novo:'badge-novo',off:'badge-off'};
+  return `<span class="prod-badge ${cls[b]}">${map[b]}</span>`;
+}
+
+function filterProducts(){
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const sort = document.getElementById('sortSelect').value;
+  let list = products.filter(p =>
+    (currentFilter === 'all' || p.category === currentFilter) &&
+    (p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q))
+  );
+  if(sort === 'price-asc') list.sort((a,b)=>a.price-b.price);
+  else if(sort === 'price-desc') list.sort((a,b)=>b.price-a.price);
+  else if(sort === 'rating') list.sort((a,b)=>b.rating-a.rating);
+  else if(sort === 'name') list.sort((a,b)=>a.name.localeCompare(b.name));
+  renderProducts(list);
+}
+
+function renderProducts(list){
+  const grid = document.getElementById('prodGrid');
+  const no = document.getElementById('noResults');
+  if(list.length === 0){ grid.innerHTML=''; no.style.display='block'; return; }
+  no.style.display = 'none';
+  grid.innerHTML = list.map((p,i) => `
+    <div class="prod-card fade-in" style="animation-delay:${i*0.07}s" onclick="openModal(products.find(x=>x.id===${p.id}))">
+      ${badgeHTML(p.badge)}
+      <button class="prod-wishlist ${wishlist.has(p.id)?'active':''}" onclick="event.stopPropagation();toggleWishCard(${p.id},this)">${wishlist.has(p.id)?'♥':'♡'}</button>
+      <div class="prod-img">${p.emoji}</div>
+      <div class="prod-body">
+        <div class="prod-brand">${p.brand}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-desc">${p.desc.substring(0,72)}...</div>
+        <div class="stars">
+          <span class="star-icons">${renderStars(p.rating)}</span>
+          <span class="star-count">${p.rating} (${p.reviews.length || Math.floor(Math.random()*40+5)})</span>
+        </div>
+        <div class="prod-footer">
+          <div>
+            ${p.oldPrice?`<span class="prod-price-old">${fmtPrice(p.oldPrice)}</span>`:''}
+            <span class="prod-price">${fmtPrice(p.price)}</span>
+          </div>
+          <button class="btn-add" onclick="event.stopPropagation();addToCart(products.find(x=>x.id===${p.id}),1)">+</button>
+        </div>
+      </div>
+    </div>`).join('');
+  observeFadeIns();
+}
+
+function setFilter(f, el){
+  currentFilter = f;
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  filterProducts();
+}
+
+// ─── MODAL ───
+function openModal(p){
+  currentProduct = p; currentQty = 1;
+  document.getElementById('modalImg').textContent = p.emoji;
+  document.getElementById('modalBrand').textContent = p.brand;
+  document.getElementById('modalName').textContent = p.name;
+  document.getElementById('modalDesc').textContent = p.desc;
+  document.getElementById('modalStars').innerHTML = `<span style="color:var(--gold);font-size:18px">${renderStars(p.rating)}</span><span style="font-size:13px;color:var(--text3);margin-left:6px">${p.rating} — ${p.reviews.length} avaliações</span>`;
+  document.getElementById('modalPrice').textContent = fmtPrice(p.price);
+  document.getElementById('modalPriceOld').textContent = p.oldPrice ? fmtPrice(p.oldPrice) : '';
+  document.getElementById('modalQty').value = 1;
+  document.getElementById('modalWishBtn').textContent = wishlist.has(p.id) ? '♥' : '♡';
+  // Specs
+  document.getElementById('modalSpecs').innerHTML = Object.entries(p.specs).map(([k,v])=>`<div class="spec-item"><label>${k}</label><span>${v}</span></div>`).join('');
+  renderReviews(p);
+  document.getElementById('productModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  document.getElementById('productModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOnBg(e){ if(e.target.id==='productModal') closeModal(); }
+function changeQty(d){ currentQty = Math.max(1, currentQty+d); document.getElementById('modalQty').value = currentQty; }
+function addFromModal(){ addToCart(currentProduct, currentQty); closeModal(); }
+function toggleWish(){
+  if(!currentProduct) return;
+  if(wishlist.has(currentProduct.id)){ wishlist.delete(currentProduct.id); document.getElementById('modalWishBtn').textContent='♡'; }
+  else { wishlist.add(currentProduct.id); document.getElementById('modalWishBtn').textContent='♥'; showToast('❤️ Adicionado aos favoritos!'); }
+  filterProducts();
+}
+function toggleWishCard(id, btn){
+  if(wishlist.has(id)){ wishlist.delete(id); btn.textContent='♡'; btn.classList.remove('active'); }
+  else { wishlist.add(id); btn.textContent='♥'; btn.classList.add('active'); showToast('❤️ Adicionado aos favoritos!'); }
+}
+
+// ─── REVIEWS ───
+function renderReviews(p){
+  const list = document.getElementById('reviewsList');
+  if(p.reviews.length === 0){ list.innerHTML='<div style="padding:20px;color:var(--text3);font-size:13px;">Ainda sem avaliações. Seja o primeiro!</div>'; }
+  else { list.innerHTML = p.reviews.map(r=>`<div class="review-item"><div class="review-top"><span class="review-author">${r.author}</span><div style="display:flex;align-items:center;gap:8px"><span style="color:var(--gold);font-size:13px">${renderStars(r.rating)}</span><span class="review-date">${r.date}</span></div></div><div class="review-text">${r.text}</div></div>`).join(''); }
+  const avg = p.reviews.length ? (p.reviews.reduce((a,b)=>a+b.rating,0)/p.reviews.length).toFixed(1) : p.rating;
+  document.getElementById('avgRating').innerHTML = `<span style="color:var(--gold);font-size:15px">${renderStars(avg)}</span> <span style="font-size:13px;color:var(--text3)">${avg}</span>`;
+  setReviewStars(5);
+}
+function setReviewStars(v){
+  reviewStars = v;
+  document.querySelectorAll('.star-pick').forEach(s=>{ s.classList.toggle('active', parseInt(s.dataset.v)<=v); s.style.color = parseInt(s.dataset.v)<=v ? 'var(--gold)' : 'var(--border2)'; });
+}
+function submitReview(){
+  const text = document.getElementById('reviewText').value.trim();
+  if(!text){ showToast('⚠️ Escreva sua avaliação!'); return; }
+  currentProduct.reviews.unshift({author:'Você',date:'Agora',rating:reviewStars,text});
+  document.getElementById('reviewText').value='';
+  renderReviews(currentProduct);
+  showToast('✅ Avaliação enviada! Obrigado!');
+}
+
+// ─── CART ───
+function addToCart(p, qty=1){
+  const ex = cart.find(i=>i.id===p.id);
+  if(ex) ex.qty+=qty; else cart.push({...p,qty});
+  renderCartBadge(); renderCartItems();
+  showToast(`✓ ${p.name.split(' ').slice(0,3).join(' ')} adicionado!`);
+}
+function renderCartBadge(){
+  const total = cart.reduce((a,b)=>a+b.qty,0);
+  document.getElementById('cartBadge').textContent = total;
+}
+function renderCartItems(){
+  const cont = document.getElementById('cartItems');
+  const foot = document.getElementById('cartFoot');
+  if(cart.length===0){
+    cont.innerHTML='<div class="cart-empty">🛒<br>Seu carrinho está vazio.<br>Adicione produtos para continuar.</div>';
+    foot.style.display='none'; return;
+  }
+  foot.style.display='block';
+  cont.innerHTML = cart.map((item,i)=>`
+    <div class="cart-item">
+      <div class="cart-item-img">${item.emoji}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-brand">${item.brand}</div>
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${fmtPrice(item.price * item.qty)}</div>
+        <div class="cart-item-controls">
+          <button class="cart-qty-btn" onclick="updateQty(${i},-1)">−</button>
+          <span class="cart-qty-num">${item.qty}</span>
+          <button class="cart-qty-btn" onclick="updateQty(${i},1)">+</button>
+          <button class="cart-remove" onclick="removeItem(${i})">🗑</button>
+        </div>
+      </div>
+    </div>`).join('');
+  renderCartTotals();
+}
+function updateQty(i,d){
+  cart[i].qty = Math.max(1, cart[i].qty+d);
+  renderCartItems(); renderCartBadge();
+}
+function removeItem(i){
+  cart.splice(i,1); renderCartItems(); renderCartBadge();
+}
+function applyCoupon(){
+  const v = document.getElementById('couponInput').value.toUpperCase().trim();
+  if(v==='MOTEX15'){ couponApplied=true; showToast('🎉 Cupom MOTEX15 aplicado! 15% OFF'); }
+  else if(v==='FRETE'){ showToast('🚚 Cupom de frete aplicado!'); }
+  else { showToast('❌ Cupom inválido'); return; }
+  renderCartTotals();
+}
+function getCartSubtotal(){ return cart.reduce((a,b)=>a+(b.price*b.qty),0); }
+function renderCartTotals(){
+  const sub = getCartSubtotal();
+  const discount = couponApplied ? sub*0.15 : 0;
+  const frete = sub >= 150 ? 0 : 19.90;
+  const total = sub - discount + frete;
+  document.getElementById('cartTotals').innerHTML =
+    `<div class="cart-row"><span>Subtotal</span><span>${fmtPrice(sub)}</span></div>
+     ${discount>0?`<div class="cart-row discount"><span>Cupom MOTEX15 (-15%)</span><span>-${fmtPrice(discount)}</span></div>`:''}
+     <div class="cart-row"><span>Frete</span><span>${frete===0?'<span style="color:var(--green)">Grátis</span>':fmtPrice(frete)}</span></div>
+     <div class="cart-row total"><span>Total</span><span>${fmtPrice(total)}</span></div>`;
+}
+function openCart(){ document.getElementById('cartOverlay').classList.add('open'); document.getElementById('cartPanel').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeCart(){ document.getElementById('cartOverlay').classList.remove('open'); document.getElementById('cartPanel').classList.remove('open'); document.body.style.overflow=''; }
+
+// ─── CHECKOUT ───
+const checkoutForms = {
+  1: `<div class="form-group"><label>Nome completo</label><input class="form-input" type="text" placeholder="Seu nome completo"></div>
+      <div class="form-row">
+        <div class="form-group"><label>E-mail</label><input class="form-input" type="email" placeholder="email@exemplo.com"></div>
+        <div class="form-group"><label>Telefone</label><input class="form-input" type="tel" placeholder="(11) 99999-9999"></div>
+      </div>
+      <div class="form-group"><label>CPF</label><input class="form-input" type="text" placeholder="000.000.000-00"></div>`,
+  2: `<div class="form-group"><label>CEP</label><input class="form-input" type="text" placeholder="00000-000"></div>
+      <div class="form-group"><label>Endereço</label><input class="form-input" type="text" placeholder="Rua, número"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Cidade</label><input class="form-input" type="text" placeholder="Cidade"></div>
+        <div class="form-group"><label>Estado</label><input class="form-input" type="text" placeholder="SP"></div>
+      </div>
+      <div class="form-group"><label>Complemento</label><input class="form-input" type="text" placeholder="Apto, bloco..."></div>`,
+  3: `<div class="form-group"><label>Forma de pagamento</label>
+      <div class="payment-options">
+        <div class="pay-opt" onclick="selectPay(this,'pix')"><span class="pay-icon">⚡</span><span class="pay-name">PIX</span></div>
+        <div class="pay-opt" onclick="selectPay(this,'card')"><span class="pay-icon">💳</span><span class="pay-name">Cartão</span></div>
+        <div class="pay-opt" onclick="selectPay(this,'boleto')"><span class="pay-icon">🧾</span><span class="pay-name">Boleto</span></div>
+      </div></div>
+      <div id="payDetails"></div>`
+};
+function selectPay(el, type){
+  selectedPayment = type;
+  document.querySelectorAll('.pay-opt').forEach(e=>e.classList.remove('selected'));
+  el.classList.add('selected');
+  const sub = getCartSubtotal();
+  const discount = couponApplied?sub*0.15:0;
+  const frete = sub>=150?0:19.90;
+  const total = sub-discount+frete;
+  const details = {
+    pix:`<div style="background:var(--panel);border:1px solid var(--border);padding:20px;text-align:center;margin-top:16px"><div style="font-size:40px">📱</div><div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;color:var(--gold);margin:8px 0">${fmtPrice(total)}</div><div style="font-size:13px;color:var(--text2)">Chave PIX: <strong>pagamentos@motex.com.br</strong><br>Validade: 30 minutos</div></div>`,
+    card:`<div style="margin-top:16px"><div class="form-group"><label>Número do cartão</label><input class="form-input" placeholder="0000 0000 0000 0000"></div><div class="form-row"><div class="form-group"><label>Validade</label><input class="form-input" placeholder="MM/AA"></div><div class="form-group"><label>CVV</label><input class="form-input" placeholder="000"></div></div><div class="form-group"><label>Nome no cartão</label><input class="form-input" placeholder="Como impresso no cartão"></div><div class="form-group"><label>Parcelas</label><select class="form-input sort-select">${[1,2,3,6,12].map(n=>`<option>em ${n}x de ${fmtPrice(total/n)}${n>1?' sem juros':''}</option>`).join('')}</select></div></div>`,
+    boleto:`<div style="background:var(--panel);border:1px solid var(--border);padding:20px;text-align:center;margin-top:16px"><div style="font-size:40px">🧾</div><div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;color:var(--gold);margin:8px 0">${fmtPrice(total)}</div><div style="font-size:13px;color:var(--text2)">Boleto gerado após confirmação<br>Vencimento em 3 dias úteis</div></div>`
+  };
+  document.getElementById('payDetails').innerHTML = details[type]||'';
+}
+function openCheckout(){
+  closeCart();
+  checkoutStep=1; selectedPayment=null;
+  renderCheckoutStep();
+  document.getElementById('checkoutModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCheckout(){
+  document.getElementById('checkoutModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function renderCheckoutStep(){
+  [1,2,3].forEach(i=>{
+    const s=document.getElementById('step'+i);
+    s.className='step'+(i===checkoutStep?' active':i<checkoutStep?' done':'');
+  });
+  document.getElementById('checkoutTitle').textContent=['','Seus Dados','Endereço','Pagamento'][checkoutStep]||'Checkout';
+  if(checkoutStep===4){
+    const orderN='MTX-'+Math.floor(Math.random()*90000+10000);
+    document.getElementById('checkoutSteps').style.display='none';
+    document.getElementById('checkoutBody').innerHTML=`
+      <div class="success-state">
+        <span class="success-icon">✅</span>
+        <h3>Pedido Confirmado!</h3>
+        <p>Obrigado pela sua compra! Seu pedido foi recebido e está sendo processado.</p>
+        <div class="order-num">${orderN}</div>
+        <p style="font-size:13px;color:var(--text3)">Você receberá um e-mail com os detalhes e o rastreamento do seu pedido.</p>
+        <button class="btn-primary" style="margin-top:24px" onclick="closeCheckout();cart=[];couponApplied=false;renderCartItems();renderCartBadge();">Continuar Comprando</button>
+      </div>`;
+    return;
+  }
+  const sub = getCartSubtotal();
+  const discount = couponApplied?sub*0.15:0;
+  const frete = sub>=150?0:19.90;
+  const total = sub-discount+frete;
+  document.getElementById('checkoutBody').innerHTML = `
+    ${checkoutForms[checkoutStep]}
+    <div style="background:var(--panel);border:1px solid var(--border);padding:14px 18px;margin-top:16px;display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:13px;color:var(--text2)">${cart.length} item(s)</span>
+      <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:20px;color:var(--gold)">${fmtPrice(total)}</span>
+    </div>
+    <div class="checkout-nav">
+      ${checkoutStep>1?`<button class="btn-back" onclick="checkoutStep--;renderCheckoutStep()">← Voltar</button>`:'<div></div>'}
+      <button class="btn-next" onclick="checkoutStep++;renderCheckoutStep()">${checkoutStep===3?'Confirmar Pedido ✓':'Continuar →'}</button>
+    </div>`;
+  if(checkoutStep===4) renderCheckoutStep();
+}
+
+// ─── TOAST ───
+let toastTimer;
+function showToast(msg){
+  clearTimeout(toastTimer);
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2400);
+}
+
+// ─── INTERSECTION OBSERVER ───
+function observeFadeIns(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.1});
+  document.querySelectorAll('.fade-in:not(.visible)').forEach(el=>obs.observe(el));
+}
+
+// ─── INIT ───
+renderProducts(products);
+observeFadeIns();
+</script>
+</body>
+</html>
